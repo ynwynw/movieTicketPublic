@@ -1,0 +1,67 @@
+/* pages/member-info/index.wxss */
+page{
+  height: 100%
+}
+
+.item{
+  border-bottom: 1rpx solid #eee;
+  padding: 24rpx;
+  font-size: 32rpx;
+  background: #fff;
+}
+
+.item .label{
+  flex: 1
+}
+
+.userinfo{
+  background: #fff;
+  text-align: center;
+  padding: 20rpx;
+}
+
+.userinfo-avatar {
+  width: 150rpx;
+  height: 150rpx;
+  border-radius: 50%;
+}
+
+.statistics{
+  background: #fff;
+  margin-bottom: 10rpx;
+  align-items: center
+}
+
+.basic{
+  background: #fff
+}
+
+.basic .title{
+  font-size: 36rpx;
+  flex: 1
+}
+
+.grid{
+  font-size: 26rpx;
+  color: #888888;
+  padding: 40rpx 0rpx 40rpx 0rpx;
+  text-align: center;
+}
+
+.line{
+  width: 2rpx;
+  background: #eee;
+  height: 100rpx
+}
+
+.grid:last-child{
+  border-right: none
+}
+
+.basic .title{
+  font-weight: bold
+}
+
+.basic .edit{
+  color: #00BFE0
+}

@@ -1,0 +1,30 @@
+<view class="container">
+  <view class="userinfo">
+    <image class="userinfo-avatar" src="{{ member.avatarUrl }}" background-size="cover"></image>
+    <view class="nickname" wx:if="{{member}}">
+      <view class="userinfo-nickname">{{ member.nickname }}</view>
+      <label class="userinfo-card">会员</label>
+    </view>
+
+    <view class="nickname" bindtap="login" wx:if="{{!member}}">
+      <view class="userinfo-nickname">点击登录</view>
+    </view>
+  </view>
+
+  <view class="weui-cells weui-cells_after-title">
+    <navigator wx:for="{{list}}" wx:key="*this" url="{{item.url}}" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+      <view class="weui-cell__bd">{{item.name}}</view>
+      <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+    </navigator>
+  </view>
+
+  <view class="weui-btn-area" wx:if="{{member}}">
+    <button type="primary" class="weui-btn" bindtap="logout">退出</button>
+  </view>
+
+  <view class="weui-footer weui-footer_fixed-bottom">
+    <view class="weui-footer__text">Copyright © 2018-2021 wfuhui.com</view>
+  </view>
+
+
+</view>

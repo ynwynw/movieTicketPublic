@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wfuhui.modules.movie.dao.SessionsDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.wfuhui.modules.movie.entity.SessionsEntity" id="sessionsMap">
+        <result property="id" column="id"/>
+        <result property="movieId" column="movie_id"/>
+        <result property="cinema" column="cinema"/>
+        <result property="price" column="price"/>
+        <result property="releaseDate" column="release_date"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+
+	<select id="queryObject" resultType="com.wfuhui.modules.movie.entity.SessionsEntity">
+		select * from film_sessions where id = #{value}
+	</select>
+
+	<select id="queryList" resultType="com.wfuhui.modules.movie.entity.SessionsEntity">
+		select s.*, m.movie_name 'movie.movieName', st.store_name 'store.storeName' from film_sessions s 
+		left join film_movie m on s.movie_id = m.id
+		left join sys_store st on st.id = s.store_id
+		<where>
+			<if test="movieId != null">
+				and s.movie_id = #{movieId}
+			</if>
+		</where>
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from film_sessions 
+	</select>
+	 
+	<insert id="save" parameterType="com.wfuhui.modules.movie.entity.SessionsEntity" useGeneratedKeys="true" keyProperty="id">
+		insert into film_sessions
+		(
+			`movie_id`, 
+			`store_id`, 
+			`cinema`, 
+			`price`, 
+			`release_date`, 
+			`create_time`
+		)
+		values
+		(
+			#{movieId}, 
+			#{storeId}, 
+			#{cinema}, 
+			#{price}, 
+			#{releaseDate}, 
+			#{createTime}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.wfuhui.modules.movie.entity.SessionsEntity">
+		update film_sessions 
+		<set>
+			<if test="movieId != null">`movie_id` = #{movieId}, </if>
+			<if test="storeId != null">`store_id` = #{storeId}, </if>
+			<if test="cinema != null">`cinema` = #{cinema}, </if>
+			<if test="price != null">`price` = #{price}, </if>
+			<if test="releaseDate != null">`release_date` = #{releaseDate}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from film_sessions where id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from film_sessions where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

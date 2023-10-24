@@ -1,0 +1,119 @@
+page {
+  height: 100%;
+}
+
+scroll-view{
+  background: #f7f7f7
+}
+
+.userinfo {
+  display: flex;
+  padding: 40rpx;
+  background: #00bfe0;
+  align-items: center;
+  vertical-align: middle;
+}
+
+.userinfo-avatar {
+  width: 150rpx;
+  height: 150rpx;
+  margin-right: 20rpx;
+  border-radius: 50%;
+}
+
+.nickname {
+  display: block;
+  flex: 1
+}
+
+.userinfo-nickname {
+  margin-top: 10rpx;
+  color: #fff;
+  font-size: 36rpx;
+}
+
+.userinfo-card {
+  margin-top: 5rpx;
+  font-size: 26rpx;
+  color: #068CA4;
+  background: #B8EAF3;
+  border-radius: 20rpx;
+  padding: 2rpx 10rpx 2rpx 10rpx;
+}
+
+.my-item {
+  background: url("https://app.wfuhui.com/images/arrow-right.png") no-repeat 705rpx center;
+  background-size: 16rpx auto;
+  background-color: white;
+  width: 100%;
+  margin: 0;
+  border-bottom: 1px solid #eee;
+  height: 100rpx;
+  line-height: 100rpx;
+}
+
+.my-item .item{
+  align-items: center;
+  font-size: 32rpx;
+  padding-left: 20rpx;
+}
+
+.my-item image{
+  width: 60rpx;
+  height: 60rpx;
+  margin-right: 16rpx;
+}
+
+.notice {
+  font-size: 28rpx;
+  color: #eee;
+}
+
+.grid{
+  margin-bottom: 20rpx;
+}
+
+.grid-item {
+  width: 33.33333333%;
+  float: left;
+  text-align: center;
+  background: #fff;
+  height: 166rpx;
+}
+
+.grid-item image {
+  width: 64rpx;
+  height: 64rpx;
+  margin-top: 26rpx;
+}
+
+.grid-item .grid-name {
+  font-size: 28rpx;
+  color: #00bfe0;
+}
+
+.grid-item .grid-name-ok {
+  font-size: 28rpx;
+  color: #AAAAAA;
+}
+
+.my-item button{
+  border: none;
+  height: 100rpx;
+  line-height: 100rpx;
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+}
+
+.my-item button::after{
+  border: none
+}
+
+.list{
+  margin-bottom: 20rpx
+}
+
+.grid{
+  height: 166rpx
+}

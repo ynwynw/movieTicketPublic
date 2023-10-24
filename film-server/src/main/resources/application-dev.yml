@@ -1,0 +1,28 @@
+spring:
+    datasource:
+        url: jdbc:mysql://127.0.0.1:3306/movieTicket?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
+        username: root
+        password: root
+        #连接池的配置信息
+        initialSize: 10
+        minIdle: 10
+        maxActive: 100
+        maxWait: 60000
+        timeBetweenEvictionRunsMillis: 60000
+        minEvictableIdleTimeMillis: 300000
+        validationQuery: SELECT 1 FROM DUAL
+        testWhileIdle: true
+        testOnBorrow: false
+        testOnReturn: false
+        poolPreparedStatements: true
+        maxPoolPreparedStatementPerConnectionSize: 20
+# 文件上传
+fileupload:
+    server: http://localhost:10001/fileupload
+    filepath: E:/educationProject/电影票系统/movieTicket/film-server/src/main/resources/static/img
+ueditor:
+    imageActionName: uploadimage
+    imageUrlPrefix: http://localhost:10001/fileupload
+    imagePath: /fileupload/
+    imageFieldName: upfile
+    imageMaxSize: 2048

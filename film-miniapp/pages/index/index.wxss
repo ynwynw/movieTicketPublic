@@ -1,0 +1,83 @@
+/**index.wxss**/
+swiper{
+  height: 300rpx;
+}
+
+.slide-image{
+  width: 750rpx;
+  height: 300rpx;
+}
+
+.category-container{
+  background: #FFFFFF
+}
+
+.weui-grids{
+  border: none;
+}
+
+.weui-grid{
+  border: none;
+}
+
+.weui-grid.category{
+  width: 25%;
+  padding: 20rpx 0rpx;
+}
+
+.movie-container{
+  padding: 8.25rpx;
+}
+
+.weui-grid.movie{
+  width: 228rpx;
+  background: #FFFFFF;
+  margin: 8.25rpx;
+  padding: 0rpx;
+}
+
+.weui-grid__icon.movie{
+  width: 228rpx;
+  height: 280rpx;
+}
+
+.weui-grid__label.movie{
+  text-align: left;
+  padding-left: 5rpx;
+}
+
+.weui-grids .label{
+  font-size: 26rpx;
+}
+
+.weui-grids .price{
+  font-size: 26rpx;
+  color: #e64340
+}
+
+.share-img {
+  border-radius: 90rpx;
+  padding: 10rpx;
+  position: fixed;
+  bottom: 50rpx;
+  right: 30rpx;
+  z-index: 999999;
+  background-size: 90rpx 90rpx;
+  background: #ef8203;
+  width: 90rpx;
+  height: 90rpx;
+  box-shadow:0 0 20rpx 0 #888;
+}
+
+.share-img image{
+  width: 70rpx;
+  height: 70rpx;
+}
+
+.title {
+  font-size: 32rpx;
+  font-weight: bold;
+  margin: 20rpx;
+  border-left: 6rpx solid #e64340;
+  padding-left: 8rpx;
+}

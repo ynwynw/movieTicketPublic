@@ -1,0 +1,16 @@
+<!--pages/auth/index.wxml-->
+<view class='container'>
+  <view class="header">
+    <image src='/images/logo.png'></image>
+  </view>
+
+  <view class='text'>
+    <view class='big'>申请获取以下权限</view>
+    <view class='small'>获得你的公开信息（昵称、头像等）</view>
+  </view>
+  <view class="weui-flex">
+    <button bindtap="cancel">取消</button>
+    <view class="md-1"></view>
+    <button type="primary" open-type='getUserInfo' bindgetuserinfo="getUserInfo">登录</button>
+  </view>
+</view>

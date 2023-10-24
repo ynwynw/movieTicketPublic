@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wfuhui.modules.movie.dao.CategoryDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.wfuhui.modules.movie.entity.CategoryEntity" id="categoryMap">
+        <result property="id" column="id"/>
+        <result property="categoryName" column="category_name"/>
+        <result property="picUrl" column="pic_url"/>
+        <result property="sort" column="sort"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+
+	<select id="queryObject" resultType="com.wfuhui.modules.movie.entity.CategoryEntity">
+		select * from film_category where id = #{value}
+	</select>
+
+	<select id="queryList" resultType="com.wfuhui.modules.movie.entity.CategoryEntity">
+		select * from film_category
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from film_category 
+	</select>
+	 
+	<insert id="save" parameterType="com.wfuhui.modules.movie.entity.CategoryEntity" useGeneratedKeys="true" keyProperty="id">
+		insert into film_category
+		(
+			`category_name`, 
+			`pic_url`, 
+			`sort`,
+			`create_time`
+		)
+		values
+		(
+			#{categoryName}, 
+			#{picUrl}, 
+			#{sort},
+			#{createTime}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.wfuhui.modules.movie.entity.CategoryEntity">
+		update film_category 
+		<set>
+			<if test="categoryName != null">`category_name` = #{categoryName}, </if>
+			<if test="picUrl != null">`pic_url` = #{picUrl}, </if>
+			<if test="sort != null">`sort` = #{sort}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from film_category where id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from film_category where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

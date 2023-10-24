@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wfuhui.modules.movie.dao.MovieDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.wfuhui.modules.movie.entity.MovieEntity" id="movieMap">
+        <result property="id" column="id"/>
+        <result property="movieName" column="movie_name"/>
+        <result property="price" column="price"/>
+        <result property="picUrl" column="pic_url"/>
+        <result property="describe" column="describe"/>
+        <result property="createTime" column="create_time"/>
+        <result property="status" column="status"/>
+        <result property="barcode" column="barcode"/>
+        <result property="director" column="director"/>
+        <result property="score" column="score"/>
+        <result property="actor" column="actor"/>
+        <association property="category" javaType="com.wfuhui.modules.movie.entity.CategoryEntity">
+        	<result property="categoryName" column="category_name"/>
+        </association>
+    </resultMap>
+
+	<select id="queryObject" resultType="com.wfuhui.modules.movie.entity.MovieEntity">
+		select g.*, c.category_name 'category.categoryName' from film_movie g left join film_category c on g.category_id = c.id where g.id = #{value}
+	</select>
+
+	<select id="queryList" resultMap="movieMap">
+		select g.*, c.category_name from film_movie g left join film_category c on g.category_id = c.id
+		<where>
+			<if test="categoryId != null and categoryId != -1">
+				c.id = #{categoryId}
+			</if>
+			<if test="movieName != null and movieName != ''">
+				and g.movie_name like '%${movieName}%'
+			</if>
+			<if test="status != null">
+				and g.status = #{status}
+			</if>
+		</where>
+		
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from film_movie 
+		<where>
+			<if test="categoryId != null and categoryId != -1">
+				category_id = #{categoryId}
+			</if>
+			<if test="movieName != null and movieName != ''">
+				and movie_name like '%${movieName}%'
+			</if>
+		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.wfuhui.modules.movie.entity.MovieEntity" useGeneratedKeys="true" keyProperty="id">
+		insert into film_movie
+		(
+			`movie_name`, 
+			`category_id`, 
+			`director`, 
+			`actor`, 
+			`price`, 
+			`pic_url`, 
+			`describe`, 
+			`status`, 
+			`score`, 
+			`create_time`
+		)
+		values
+		(
+			#{movieName}, 
+			#{categoryId}, 
+			#{director}, 
+			#{actor}, 
+			#{price}, 
+			#{picUrl}, 
+			#{describe}, 
+			#{status}, 
+			#{score}, 
+			#{createTime}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.wfuhui.modules.movie.entity.MovieEntity">
+		update film_movie 
+		<set>
+			<if test="movieName != null">`movie_name` = #{movieName}, </if>
+			<if test="categoryId != null">`category_id` = #{categoryId}, </if>
+			<if test="director != null">`director` = #{director}, </if>
+			<if test="actor != null">`actor` = #{actor}, </if>
+			<if test="price != null">`price` = #{price}, </if>
+			<if test="picUrl != null">`pic_url` = #{picUrl}, </if>
+			<if test="status != null">`status` = #{status}, </if>
+			<if test="score != null">`score` = #{score}, </if>
+			<if test="describe != null">`describe` = #{describe}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from film_movie where id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from film_movie where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+	
+	<update id="updateStatus">
+		update film_movie set status = #{status} where id in 
+		<foreach item="id" collection="ids" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</update>
+	
+	<select id="queryByIds" resultType="com.wfuhui.modules.movie.entity.MovieEntity">
+		select * from film_movie where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</select>
+	
+	<update id="delStock">
+		update film_movie set stock = stock - #{stock} where id = #{id}
+	</update>
+	
+	<update id="addStock">
+		update film_movie set stock = stock + #{stock} where id = #{id}
+	</update>
+	
+
+</mapper>

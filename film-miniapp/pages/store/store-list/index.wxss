@@ -1,0 +1,24 @@
+/* pages/store/store-list/index.wxss */
+page{
+  height: 100%;
+}
+.list-item{
+  padding: 10rpx;
+  border-bottom: 1rpx solid #eee;
+  background: #fff;
+}
+
+.list-item image{
+  width: 200rpx;
+  height: 200rpx;
+  margin-right: 10rpx;
+}
+
+.list-item .title{
+  font-size: 32rpx;
+  margin-bottom: 10rpx;
+}
+
+.list-item .content{
+  font-size: 28rpx;
+}

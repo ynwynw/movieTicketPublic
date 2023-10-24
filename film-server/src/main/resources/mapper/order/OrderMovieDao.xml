@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wfuhui.modules.order.dao.OrderMovieDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.wfuhui.modules.order.entity.OrderMovieEntity" id="orderMovieMap">
+        <result property="id" column="id"/>
+        <result property="orderId" column="order_id"/>
+        <result property="movieId" column="movie_id"/>
+        <result property="movieName" column="movie_name"/>
+        <result property="num" column="num"/>
+        <result property="picUrl" column="pic_url"/>
+        <result property="price" column="price"/>
+    </resultMap>
+
+	<select id="queryObject" resultType="com.wfuhui.modules.order.entity.OrderMovieEntity">
+		select * from film_order_movie where id = #{value}
+	</select>
+
+	<select id="queryList" resultType="com.wfuhui.modules.order.entity.OrderMovieEntity">
+		select * from film_order_movie
+		
+		<where>
+			<if test="orderId != null">
+				order_id = ${orderId}
+			</if>
+		</where>
+		
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from film_order_movie 
+		<where>
+			<if test="orderId != null">
+				order_id = ${orderId}
+			</if>
+		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.wfuhui.modules.order.entity.OrderMovieEntity" useGeneratedKeys="true" keyProperty="id">
+		insert into film_order_movie
+		(
+			`order_id`, 
+			`movie_id`,
+			`movie_name`,
+			`num`,
+			`pic_url`,
+			`price`
+		)
+		values
+		(
+			#{orderId}, 
+			#{movieId},
+			#{movieName},
+			#{num},
+			#{picUrl},
+			#{price}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.wfuhui.modules.order.entity.OrderMovieEntity">
+		update film_order_movie 
+		<set>
+			<if test="orderId != null">`order_id` = #{orderId}, </if>
+			<if test="movieId != null">`movie_id` = #{movieId}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from film_order_movie where id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from film_order_movie where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

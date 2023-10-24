@@ -1,0 +1,27 @@
+<!--pages/classify/index.wxml-->
+<view class='container'>
+
+  <view class="weui-flex">
+    <view class="weui-navbar">
+      <block wx:for="{{categoryList}}" wx:key="*this">
+        <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" data-id='{{item.id}}' bindtap="tabClick">
+          <view class="weui-navbar__title">{{item.categoryName}}</view>
+        </view>
+      </block>
+    </view>
+    <view class="weui-flex__item">
+      <view class='category-container'>
+        <view class="weui-grids">
+        <block wx:for="{{movieList}}" wx:key="index">
+          <navigator url="../movie/movie-detail/index?id={{item.id}}" class="weui-grid category">
+            <image class="weui-grid__icon" src="{{item.picUrl}}" />
+            <view class="weui-grid__label goods_name">{{item.movieName}}</view>
+            <view class="weui-grid__label price">￥{{item.price}}</view>
+          </navigator>
+        </block>
+      </view>
+      </view>
+    </view>
+  </view>
+
+</view>

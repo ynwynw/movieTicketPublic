@@ -1,0 +1,63 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/login/index",
+    "pages/register/index",
+    "pages/auth/index",
+    "pages/classify/index",
+    "pages/my/edit/index",
+    "pages/my/index/index",
+    "pages/my/info/index",
+    "pages/store/store-list/index",
+    "pages/store/store-detail/index",
+    "pages/movie/sessions/index",
+    "pages/movie/movie-list/index",
+    "pages/movie/movie-like/index",
+    "pages/movie/movie-detail/index",
+    "pages/hall/hall",
+    "pages/order/order-list/index",
+    "pages/order/order-confirm/index",
+    "pages/order/order-pay/index",
+    "pages/order/order-evaluate/index"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "电影",
+    "navigationBarTextStyle":"black"
+  },
+  "tabBar": {
+    "color": "#6e6d6b",
+    "selectedColor": "#e64340",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "box-shadow": "0 0 6px 0",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "images/nav/home-off.png",
+        "selectedIconPath": "images/nav/home-on.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/classify/index",
+        "iconPath": "images/nav/classify-off.png",
+        "selectedIconPath": "images/nav/classify-on.png",
+        "text": "分类"
+      },
+      {
+        "pagePath": "pages/store/store-list/index",
+        "iconPath": "images/nav/store-off.png",
+        "selectedIconPath": "images/nav/store-on.png",
+        "text": "影院"
+      },
+      {
+        "pagePath": "pages/my/index/index",
+        "iconPath": "images/nav/personal-off.png",
+        "selectedIconPath": "images/nav/personal-on.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+}

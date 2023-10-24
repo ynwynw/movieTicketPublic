@@ -1,0 +1,66 @@
+/* pages/classify/index.wxss */
+page{
+  height: 100%
+}
+
+.weui-flex{
+  height: 100%
+}
+
+.weui-tab{
+  display: flex
+}
+
+.weui-navbar{
+  display: block;
+  width: 200rpx;
+  position: static;
+  border: none
+}
+
+.category-container{
+  background: #FFFFFF;
+  height: 100%
+}
+
+.weui-grids{
+  border: none;
+}
+
+.weui-grid{
+  border: none;
+  width: 50%
+}
+
+.weui-grid.category{
+  padding: 20rpx 0rpx;
+}
+
+.weui-bar__item_on{
+  border-left: 6rpx solid #00bfe0;
+  background: #FFFFFF
+}
+
+.weui-grid__icon{
+  width: 200rpx;
+  height: 250rpx;
+}
+
+.goods_name{
+  font-size: 32rpx
+}
+
+.price{
+  font-size: 28rpx;
+  color: #e64340
+}
+
+.weui-navbar__item.weui-bar__item_on{
+  color: #00bfe0
+}
+
+.weui-grid__label{
+  width: 200rpx;
+  text-align: left;
+  margin: 0 auto;
+}

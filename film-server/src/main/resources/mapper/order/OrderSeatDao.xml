@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wfuhui.modules.order.dao.OrderSeatDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.wfuhui.modules.order.entity.OrderSeatEntity" id="orderSeatMap">
+        <result property="id" column="id"/>
+        <result property="orderId" column="order_id"/>
+        <result property="movieId" column="movie_id"/>
+        <result property="seatId" column="seat_id"/>
+        <result property="seatName" column="seat_name"/>
+    </resultMap>
+
+	<select id="queryObject" resultType="com.wfuhui.modules.order.entity.OrderSeatEntity">
+		select * from film_order_seat where id = #{value}
+	</select>
+
+	<select id="queryList" resultType="com.wfuhui.modules.order.entity.OrderSeatEntity">
+		select * from film_order_seat
+		<where>
+			<if test="orderId != null">
+				order_id = ${orderId}
+			</if>
+		</where>
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from film_order_seat 
+	</select>
+	 
+	<insert id="save" parameterType="com.wfuhui.modules.order.entity.OrderSeatEntity" useGeneratedKeys="true" keyProperty="id">
+		insert into film_order_seat
+		(
+			`order_id`, 
+			`movie_id`, 
+			`seat_id`, 
+			`sessions_id`, 
+			`sessions_name`, 
+			`seat_name`
+		)
+		values
+		(
+			#{orderId}, 
+			#{movieId}, 
+			#{seatId}, 
+			#{sessionsId}, 
+			#{sessionsName}, 
+			#{seatName}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.wfuhui.modules.order.entity.OrderSeatEntity">
+		update film_order_seat 
+		<set>
+			<if test="orderId != null">`order_id` = #{orderId}, </if>
+			<if test="movieId != null">`movie_id` = #{movieId}, </if>
+			<if test="seatId != null">`seat_id` = #{seatId}, </if>
+			<if test="seatName != null">`seat_name` = #{seatName}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from film_order_seat where id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from film_order_seat where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

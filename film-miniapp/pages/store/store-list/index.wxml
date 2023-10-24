@@ -1,0 +1,10 @@
+<!--pages/store/store-list/index.wxml-->
+<view class="container">
+  <view class="weui-flex list-item" wx:for="{{storeList}}" wx:key="index" data-id="{{item.id}}" bindtap="detail">
+    <image class="logo" src="{{item.picUrl}}"></image>
+    <view>
+      <view class="title">{{item.storeName}}</view>
+      <view class="content">{{item.address}}</view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wfuhui.modules.store.dao.StoreDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.wfuhui.modules.store.entity.StoreEntity" id="seatMap">
+        <result property="id" column="id"/>
+        <result property="storeName" column="store_name"/>
+        <result property="sort" column="sort"/>
+        <result property="picUrl" column="pic_url"/>
+        <result property="status" column="status"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+
+	<select id="queryObject" resultType="com.wfuhui.modules.store.entity.StoreEntity">
+		select * from sys_store where id = #{value}
+	</select>
+
+	<select id="queryList" resultType="com.wfuhui.modules.store.entity.StoreEntity">
+		select * from sys_store
+		<where>
+			<if test="storeId != null">
+				id = #{storeId}
+			</if>
+		</where>
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from sys_store 
+		<where>
+			<if test="storeId != null">
+				id = #{storeId}
+			</if>
+		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.wfuhui.modules.store.entity.StoreEntity" useGeneratedKeys="true" keyProperty="id">
+		insert into sys_store
+		(
+			`store_name`, 
+			`sort`, 
+			`pic_url`, 
+			`status`, 
+			`address`, 
+			`create_time`
+		)
+		values
+		(
+			#{storeName}, 
+			#{sort}, 
+			#{picUrl}, 
+			#{status}, 
+			#{address}, 
+			#{createTime}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.wfuhui.modules.store.entity.StoreEntity">
+		update sys_store 
+		<set>
+			<if test="storeName != null">`store_name` = #{storeName}, </if>
+			<if test="sort != null">`sort` = #{sort}, </if>
+			<if test="picUrl != null">`pic_url` = #{picUrl}, </if>
+			<if test="status != null">`status` = #{status}, </if>
+			<if test="address != null">`address` = #{address}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from sys_store where id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from sys_store where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

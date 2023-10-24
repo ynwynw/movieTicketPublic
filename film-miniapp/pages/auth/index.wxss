@@ -1,0 +1,48 @@
+/* pages/auth/index.wxss */
+
+.container {
+  background: #fff;
+  padding-left: 30rpx;
+  padding-right: 30rpx;
+}
+
+.header {
+  height: 300rpx;
+  border-bottom: 1rpx solid #eee;
+  display: flex;
+  align-items: center;
+  margin-bottom: 50rpx;
+}
+
+image {
+  width: 160rpx;
+  height: 160rpx;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.big {
+  font-size: 38rpx;
+  color: #333;
+  margin-bottom: 30rpx;
+}
+
+.small {
+  font-size: 32rpx;
+  color: #999;
+  margin-bottom: 50rpx;
+}
+
+button {
+  border-radius: 45rpx;
+  width: 100%;
+  border: none;
+}
+
+button::after {
+  border: none;
+}
+
+.md-1 {
+  width: 50rpx;
+}
